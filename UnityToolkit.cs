@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Text;
 
 namespace UnityToolkit {
 	// Ex. transform.position = transform.position.WithX(1);
@@ -221,6 +222,42 @@ namespace UnityToolkit {
 		/// </summary>
 		public static long Squared(this long l) {
 			return l * l;
+		}
+	}
+
+	// Ex. s = s.UppercaseFirst();
+	public static class StringToolkit {
+		/// <summary>
+		/// Returns this string with a space between each camel case.
+		/// </summary>
+		public static string SplitOnCamelCase(this string s) {
+			StringBuilder builder = new StringBuilder();
+			for (int i = 0; i < s.Length; i++) {
+				if (i > 0 && char.IsUpper(s[i])) {
+					builder.Append(' ');
+                }
+				builder.Append(s[i]);
+			}
+			return builder.ToString();
+        }
+		/// <summary>
+		/// Returns this string with an uppercase first letter.
+		/// </summary>
+		public static string UppercaseFirst(this string s) {
+			if (string.IsNullOrEmpty(s)) {
+				return string.Empty;
+			}
+			return char.ToUpper(s[0]) + s.Substring(1);
+		}
+	}
+
+	// Ex. if (c.IsEnglishLetter()) { }
+	public static class CharToolkit {
+		/// <summary>
+		/// Returns true if this char is a lower or upper english letter.
+		/// </summary>
+		public static bool IsEnglishLetter(this char c) {
+			return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 		}
 	}
 }
