@@ -235,11 +235,11 @@ namespace UnityToolkit {
 			for (int i = 0; i < s.Length; i++) {
 				if (i > 0 && char.IsUpper(s[i])) {
 					builder.Append(' ');
-                }
+                		}
 				builder.Append(s[i]);
 			}
 			return builder.ToString();
-        }
+		}
 		/// <summary>
 		/// Returns this string with an uppercase first letter.
 		/// </summary>
