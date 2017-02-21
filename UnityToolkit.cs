@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 
 namespace UnityToolkit {
-
 	// Ex. transform.position = transform.position.WithX(1);
 	public static class VectorToolkit {
 		/// <summary>
