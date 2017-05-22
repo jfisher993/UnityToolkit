@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System;
 using System.Text;
 
-namespace UnityToolkit {
+namespace UnityEngine {
 	// Ex. transform.position = transform.position.WithX(1);
 	public static class VectorToolkit {
 		/// <summary>
@@ -77,6 +76,38 @@ namespace UnityToolkit {
 		/// </summary>
 		public static Vector3 Flip(this Vector3 vec) {
 			return new Vector3(vec.z, vec.y, vec.x);
+		}
+		/// <summary>
+		/// Returns this Vector3 rounded to the nearest 1/2 mark.
+		/// </summary>
+		public static Vector3 AlignWithHalfGrid(this Vector3 vec) {
+			vec.x = Mathf.RoundToInt(vec.x * 2) / 2f;
+			vec.z = Mathf.RoundToInt(vec.z * 2) / 2f;
+			return vec;
+		}
+		/// <summary>
+		/// Returns this Vector3 locked to the nearest .5.
+		/// </summary>
+		public static Vector3 SnapToHalfGrid(this Vector3 vec) {
+			vec.x = vec.x.FloorToIntSplit();
+			vec.z = vec.z.FloorToIntSplit();
+			return vec;
+		}
+		/// <summary>
+		/// Returns this Vector3 rounded to the nearest integer.
+		/// </summary>
+		public static Vector3 SnapToSingleGrid(this Vector3 vec) {
+			vec.x = Mathf.RoundToInt(vec.x);
+			vec.z = Mathf.RoundToInt(vec.z);
+            return vec;
+		}
+		/// <summary>
+		/// Returns this Vector3 clamped within a bounds taking into account the object size.
+		/// </summary>
+		public static Vector3 ClampWithinBounds(this Vector3 vec, Bounds bounds, Vector3 halfScale) {
+			vec.x = vec.x.ClampWithScale(new Vector2(bounds.min.x, bounds.max.x), halfScale.x);
+			vec.z = vec.z.ClampWithScale(new Vector2(bounds.min.z, bounds.max.z), halfScale.z);
+			return vec;
 		}
 	}
 
@@ -223,6 +254,27 @@ namespace UnityToolkit {
 		public static long Squared(this long l) {
 			return l * l;
 		}
+		/// <summary>
+		/// Returns the value of this instance taken to Mathf.Floor with .5f added
+		/// </summary>
+		public static float FloorToIntSplit(this float f) {
+			return Mathf.FloorToInt(f) + .5f;
+		}
+		/// <summary>
+		/// Returns this float clamped within the Min and Max taking into account the objects scale.
+		/// </summary>
+		public static float ClampWithScale(this float f, Vector2 minMax, float halfScale) {
+			for (int i = 0; i < halfScale; i++) {
+				if (f - i <= minMax.x) {
+					f = minMax.x + halfScale;
+					break;
+				} else if (f + i >= minMax.y) {
+					f = minMax.y - halfScale;
+					break;
+				}
+			}
+			return f;
+		}
 	}
 
 	// Ex. s = s.UppercaseFirst();
@@ -235,11 +287,11 @@ namespace UnityToolkit {
 			for (int i = 0; i < s.Length; i++) {
 				if (i > 0 && char.IsUpper(s[i])) {
 					builder.Append(' ');
-                		}
+                }
 				builder.Append(s[i]);
 			}
 			return builder.ToString();
-		}
+        }
 		/// <summary>
 		/// Returns this string with an uppercase first letter.
 		/// </summary>
@@ -260,4 +312,29 @@ namespace UnityToolkit {
 			return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 		}
 	}
+
+    // Ex. bounds = bounds.ConvertToViewportBounds(mainCam);
+    public static class BoundsToolkit {
+        /// <summary>
+        /// Returns this bounds converted to the specified cameras viewport
+        /// </summary>
+        public static Bounds ConvertToViewportBounds(this Bounds bounds, Camera cam){
+            bounds.SetMinMax(cam.WorldToViewportPoint(bounds.min).WithZ(cam.nearClipPlane), 
+                cam.WorldToViewportPoint(bounds.max).WithZ(cam.farClipPlane));
+            return bounds;
+        }
+    }
+
+    // Ex. action.TryFire();
+    public static class ActionToolkit {
+        /// <summary>
+        /// Fires the action if it is not null as a safeguard.
+        /// </summary>
+        /// <param name="action">Action.</param>
+        public static void TryFire(this Action action){
+            if (action != null){
+                action();
+            }
+        }
+    }
 }
