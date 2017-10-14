@@ -4,6 +4,7 @@ using System;
 using System.Text;
 
 namespace UnityEngine {
+
 	// Ex. transform.position = transform.position.WithX(1);
 	public static class VectorToolkit {
 		/// <summary>
@@ -25,6 +26,21 @@ namespace UnityEngine {
 		/// </summary>
 		public static Vector2 Flip(this Vector2 vec) {
 			return new Vector2(vec.y, vec.x);
+		}
+		/// <summary>
+		/// Returns this Vector3 with it's X and Z as a new Vector2.
+		/// </summary>
+		public static Vector2 ConvertToVector2(this Vector3 vec) {
+			return new Vector2(vec.x, vec.z);
+		}
+		/// <summary>
+		/// Are all of this Vector's values greater than or equal to the specified Vector.
+		/// </summary>
+		public static bool GreaterThanOrEqual(this Vector2 vec1, Vector2 vec2) {
+			if (vec1.x >= vec2.x && vec1.y >= vec2.y) {
+				return true;
+			}
+			return false;
 		}
 		/// <summary>
 		/// Returns this Vector3 with a specified X value.
@@ -78,17 +94,33 @@ namespace UnityEngine {
 			return new Vector3(vec.z, vec.y, vec.x);
 		}
 		/// <summary>
-		/// Returns this Vector3 rounded to the nearest 1/2 mark.
+		/// Returns this Vector2 with it's X and Y as a new Vector3's X and Z with a specified Y.
 		/// </summary>
-		public static Vector3 AlignWithHalfGrid(this Vector3 vec) {
+		public static Vector3 ConvertToVector3(this Vector2 vec, float y = 0) {
+			return new Vector3(vec.x, y, vec.y);
+		}
+		/// <summary>
+		/// Are all of this Vector's values greater than or equal to the specified Vector.
+		/// </summary>
+		public static bool GreaterThanOrEqual(this Vector3 vec1, Vector3 vec2) {
+			if (vec1.x >= vec2.x && vec1.y >= vec2.y && vec1.z >= vec2.z) {
+				return true;
+			}
+			return false;
+		}
+		/// <summary>
+		/// Returns this Vector3 rounded to the nearest 1/2.
+		/// </summary>
+		public static Vector3 RoundToNearestHalf(this Vector3 vec) {
 			vec.x = Mathf.RoundToInt(vec.x * 2) / 2f;
 			vec.z = Mathf.RoundToInt(vec.z * 2) / 2f;
 			return vec;
 		}
 		/// <summary>
-		/// Returns this Vector3 locked to the nearest .5.
+		/// Returns this Vector3 locked to the nearest 1/2.
+		/// *Note: This produces cleaner results than RoundToNearestHalf
 		/// </summary>
-		public static Vector3 SnapToHalfGrid(this Vector3 vec) {
+		public static Vector3 LockToNearestHalf(this Vector3 vec) {
 			vec.x = vec.x.FloorToIntSplit();
 			vec.z = vec.z.FloorToIntSplit();
 			return vec;
@@ -96,10 +128,19 @@ namespace UnityEngine {
 		/// <summary>
 		/// Returns this Vector3 rounded to the nearest integer.
 		/// </summary>
-		public static Vector3 SnapToSingleGrid(this Vector3 vec) {
+		public static Vector3 RoundToInt(this Vector3 vec) {
+			vec.x = Mathf.RoundToInt(vec.x);
+			vec.y = Mathf.RoundToInt(vec.y);
+			vec.z = Mathf.RoundToInt(vec.z);
+			return vec;
+		}
+		/// <summary>
+		/// Returns this Vector3 with it's X and Z rounded to the nearest integer.
+		/// </summary>
+		public static Vector3 RoundToIntXZ(this Vector3 vec) {
 			vec.x = Mathf.RoundToInt(vec.x);
 			vec.z = Mathf.RoundToInt(vec.z);
-            return vec;
+			return vec;
 		}
 		/// <summary>
 		/// Returns this Vector3 clamped within a bounds taking into account the object size.
@@ -180,6 +221,24 @@ namespace UnityEngine {
 			list.RemoveAt(randLoc);
 			return item;
 		}
+		/// <summary>
+		/// Returns this list with the specified components converted to the correct type.
+		/// </summary>
+		public static List<T> AddComponentsToList<T>(this List<T> list, Component[] components) {
+			for (int i = 0; i < components.Length; i++) {
+				list.Add(components[i].GetComponent<T>());
+			}
+			return list;
+		}
+		/// <summary>
+		/// Returns this list with the specified components game object component.
+		/// </summary>
+		public static List<GameObject> AddComponentsToList(this List<GameObject> list, Component[] components) {
+			for (int i = 0; i < components.Length; i++) {
+				list.Add(components[i].gameObject);
+			}
+			return list;
+		}
 	}
 
 	// Ex. f = f.Squared();
@@ -201,7 +260,7 @@ namespace UnityEngine {
 		/// Returns the value of this instance multiplied by the interval in seconds at which physics are performed.
 		/// </summary>
 		public static float WithFixedDelaTime(this float f) {
-			return f * Time.fixedDeltaTime;
+			return f * Time.deltaTime;
 		}
 		/// <summary>
 		/// Returns the value of this instance multiplied by the timeScale-independent time in seconds it took to complete the last frame.
@@ -215,10 +274,10 @@ namespace UnityEngine {
 		public static float ToPower(this float f, int exponent) {
 			float total = 1;
 			if (exponent < 0) {
-				LoopAction(exponent * -1, (int i)=> total *= i % 2 == 0 ? f * -1 : f);
+				LoopAction(exponent * -1, (int i) => total *= i % 2 == 0 ? f * -1 : f);
 				total = 1 / total;
 			} else {
-				LoopAction(exponent, (int i)=> total *= f);
+				LoopAction(exponent, (int i) => total *= f);
 			}
 			return total;
 		}
@@ -235,6 +294,12 @@ namespace UnityEngine {
 		/// </summary>
 		public static float Squared(this float f) {
 			return f * f;
+		}
+		/// <summary>
+		/// Returns the value of this instance taken to the 3rd power.
+		/// </summary>
+		public static float Cubed(this float f) {
+			return f * f * f;
 		}
 		/// <summary>
 		/// Returns the value of this instance multiplied by the value of this instance.
@@ -287,11 +352,11 @@ namespace UnityEngine {
 			for (int i = 0; i < s.Length; i++) {
 				if (i > 0 && char.IsUpper(s[i])) {
 					builder.Append(' ');
-                		}
+				}
 				builder.Append(s[i]);
 			}
 			return builder.ToString();
-        }
+		}
 		/// <summary>
 		/// Returns this string with an uppercase first letter.
 		/// </summary>
@@ -313,28 +378,68 @@ namespace UnityEngine {
 		}
 	}
 
-    // Ex. bounds = bounds.ConvertToViewportBounds(mainCam);
-    public static class BoundsToolkit {
-        /// <summary>
-        /// Returns this bounds converted to the specified cameras viewport
-        /// </summary>
-        public static Bounds ConvertToViewportBounds(this Bounds bounds, Camera cam){
-            bounds.SetMinMax(cam.WorldToViewportPoint(bounds.min).WithZ(cam.nearClipPlane), 
-                cam.WorldToViewportPoint(bounds.max).WithZ(cam.farClipPlane));
-            return bounds;
-        }
-    }
+	// Ex. action.FireAction();
+	public static class ActionToolkit {
+		/// <summary>
+		/// Fires this action if the action is not null.
+		/// </summary>
+		public static void FireAction(this Action action) {
+			if (action != null) {
+				action();
+			}
+		}
+		/// <summary>
+		/// Fires this action along with a single parameter if the action is not null.
+		/// </summary>
+		public static void FireAction<T>(this Action<T> action, T t) {
+			if (action != null) {
+				action(t);
+			}
+		}
+		/// <summary>
+		/// Fires this action along with two parameters if the action is not null.
+		/// </summary>
+		public static void FireAction<T1, T2>(this Action<T1, T2> action, T1 tOne, T2 tTwo) {
+			if (action != null) {
+				action(tOne, tTwo);
+			}
+		}
+		/// <summary>
+		/// Fires this action along with three parameters if the action is not null.
+		/// </summary>
+		public static void FireAction<T1, T2, T3>(this Action<T1, T2, T3> action, T1 tOne, T2 tTwo, T3 tThree) {
+			if (action != null) {
+				action(tOne, tTwo, tThree);
+			}
+		}
+	}
 
-    // Ex. action.TryFire();
-    public static class ActionToolkit {
-        /// <summary>
-        /// Fires the action if it is not null as a safeguard.
-        /// </summary>
-        /// <param name="action">Action.</param>
-        public static void TryFire(this Action action){
-            if (action != null){
-                action();
-            }
-        }
-    }
+	public static class TransformToolkit {
+		/// <summary>
+		/// Returns the transform of all children whose name starts with the specified prefix.
+		/// </summary>
+		public static Transform[] FindAll(this Transform transform, string prefix) {
+			List<Transform> matchingTransforms = new List<Transform>();
+			for (int i = 0; i < transform.childCount; i++) {
+				Transform child = transform.GetChild(i);
+				if (child.name.Substring(0, prefix.Length).Equals(prefix)) {
+					matchingTransforms.Add(child);
+				}
+			}
+			return matchingTransforms.ToArray();
+		}
+	}
+
+	// Ex. bounds = bounds.ConvertToViewportBounds(mainCam);
+	public static class BoundsToolkit {
+		/// <summary>
+		/// Returns this bounds converted to the specified cameras viewport
+		/// </summary>
+		public static Bounds ConvertToViewportBounds(this Bounds bounds, Camera cam) {
+			bounds.SetMinMax(cam.WorldToViewportPoint(bounds.min).WithZ(cam.nearClipPlane),
+				cam.WorldToViewportPoint(bounds.max).WithZ(cam.farClipPlane));
+			return bounds;
+		}
+	}
+
 }
