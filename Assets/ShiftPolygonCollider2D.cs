@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(PolygonCollider2D))]
-public class PolyColliderFixer : ColliderFixer2D {
+public class ShiftPolygonCollider2D : ShiftCollider2D {
+
 	[SerializeField]
 	protected int path;
 

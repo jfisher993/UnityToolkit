@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(EdgeCollider2D))]
-public class EdgeColliderFixer : ColliderFixer2D {
+public class ShiftEdgeCollider2D : ShiftCollider2D {
 
 	[ContextMenu("Shift Points")]
 	override protected void ShiftPoints() {

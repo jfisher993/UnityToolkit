@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class ColliderFixer2D : MonoBehaviour {
+public abstract class ShiftCollider2D : MonoBehaviour {
 
 	[SerializeField]
 	protected Vector2 shiftAmount = Vector2.zero;
