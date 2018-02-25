@@ -26,7 +26,7 @@ public class ColorSwitcher : MonoBehaviour {
     private bool isIndexIncreasing;
     private float timer;
 
-    void Start() {
+    private void Start() {
         InitializeSwitcher();
     }
 
@@ -47,7 +47,7 @@ public class ColorSwitcher : MonoBehaviour {
         isIndexIncreasing = !isReversed;
     }
 
-    void Update() {
+    private void Update() {
         if (!isEnabled){
             return;
         }
@@ -111,7 +111,7 @@ public class ColorSwitcher : MonoBehaviour {
         }
     }
 
-    void OnValidate() {
+    private void OnValidate() {
         if (startIndex >= switchers.Length){
             startIndex = switchers.Length - 1;
         } else if (startIndex < 0){
