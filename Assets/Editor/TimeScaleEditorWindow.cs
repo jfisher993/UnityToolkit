@@ -8,7 +8,6 @@ namespace EditorExtension {
 		private const string TIME_SCALE_EDITOR_DIR = "Tools/Time Scale Editor %T";
 		private const int DIRECTORY_GROUP = 2;
 
-		private bool groupEnabled;
 		private float minTimeScale = 0;
 		private float maxTimeScale = 3;
 
