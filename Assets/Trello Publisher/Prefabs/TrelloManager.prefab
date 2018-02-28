@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1089447598518748
 GameObject:
   m_ObjectHideFlags: 1
@@ -417,9 +417,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4540121249075240}
-  - component: {fileID: 114575381656278210}
+  - component: {fileID: 114108965753824784}
   m_Layer: 0
-  m_Name: TrelloPublisher
+  m_Name: TrelloManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -503,6 +503,23 @@ GameObject:
   - component: {fileID: 114675194824472882}
   m_Layer: 0
   m_Name: Arrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1613542882185530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4769073757820774}
+  - component: {fileID: 114905623380022956}
+  - component: {fileID: 114993246742084092}
+  m_Layer: 0
+  m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -705,8 +722,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224008444073458326}
+  - {fileID: 4769073757820774}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4769073757820774
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613542882185530}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4540121249075240}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114017664132754200
 MonoBehaviour:
@@ -805,11 +836,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Name of List_1
-      m_Image: {fileID: 0}
-    - m_Text: Name of List_2
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -885,6 +912,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114108965753824784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1512421964109588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0eb8e5f008b68a459335f4f39d2bbd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trelloPublisher: {fileID: 11400000, guid: ddb0fac205b39944eaf31e8d40bc4c2f, type: 2}
+  trelloCanvas: {fileID: 1221425417629000}
+  reportPanel: {fileID: 1048461102280718}
+  cardName: {fileID: 114214003635795610}
+  cardDesc: {fileID: 114307252914854794}
+  cardPosition: {fileID: 114188553823301374}
+  cardList: {fileID: 114024442382695026}
 --- !u!114 &114126991619696634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1505,7 +1550,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Card Name...
+  m_Text: Title...
 --- !u!114 &114434554761954556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1729,29 +1774,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Card Description...
---- !u!114 &114575381656278210
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1512421964109588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20419a8bf47852943bdc02524974e7ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: 'EX: 1efc3f63f89141e6fc65e08539a61c53'
-  token: 'EX: 47fbe4360b3b81990bd12ca5efe35e1e3a468a6e6b2046e78081817a2797bcea'
-  lists:
-  - LIST_1
-  - LIST_2
-  trelloCanvas: {fileID: 1221425417629000}
-  reportPanel: {fileID: 1048461102280718}
-  cardName: {fileID: 114214003635795610}
-  cardDesc: {fileID: 114307252914854794}
-  cardPosition: {fileID: 114188553823301374}
-  cardList: {fileID: 114024442382695026}
+  m_Text: Description...
 --- !u!114 &114585412987013774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1791,16 +1814,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1048461102280718}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 114108965753824784}
+        m_MethodName: TogglePanel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -1823,7 +1846,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: db4b04f2a388eb04fbfa7a8fd8fdae57, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 82d2151b483305646b362e1a293eb7b9, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1957,8 +1980,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114575381656278210}
-        m_MethodName: PostCard
+      - m_Target: {fileID: 114108965753824784}
+        m_MethodName: StartPostCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1968,8 +1991,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114575381656278210}
-        m_MethodName: Reset
+      - m_Target: {fileID: 114108965753824784}
+        m_MethodName: TogglePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2074,8 +2097,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114575381656278210}
-        m_MethodName: Reset
+      - m_Target: {fileID: 114108965753824784}
+        m_MethodName: TogglePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2174,6 +2197,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114905623380022956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613542882185530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
 --- !u!114 &114948392350691170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2326,7 +2363,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name of List_1
+  m_Text: 
 --- !u!114 &114990821780829940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2358,6 +2395,24 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114993246742084092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613542882185530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!222 &222006390126107172
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -2662,7 +2717,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: -160}
+  m_AnchoredPosition: {x: 150, y: -155}
   m_SizeDelta: {x: 115, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224076081752630214
@@ -3123,7 +3178,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 149.4, y: -100}
+  m_AnchoredPosition: {x: 149.4, y: -95}
   m_SizeDelta: {x: 115, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224814473346685284
