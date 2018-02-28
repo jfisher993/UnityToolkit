@@ -13,15 +13,15 @@ Install Steps:
 
 2) Authorize and test your Trello connection by clicking the buttons and filling in the fields on the 'TrelloPosterExample' asset.
 
-  a. Get Key
+       a. Get Key
   
-  b. Get Token
+       b. Get Token
   
-  c. Get Board Id's
+       c. Get Board Id's
   
-  d. Get Card List Id's
+       d. Get Card List Id's
   
-  e. Publish Test Cards
+       e. Publish Test Cards
   
   
   A web browsing JSON extension like [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) will make this step easier.
