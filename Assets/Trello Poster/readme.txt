@@ -1,8 +1,9 @@
+##Trello Poster
 Trello Poster allows you and your users to create cards directly from your game to Trello.
 
 The cards can be posted with a title, description, to the top or bottom of a Trello list, and to any Trello list within your board.
 
-Demo UI and Manager prefab provided.
+Demo UI script, and TrelloManager prefab provided.
 
 Install Steps:
 
@@ -18,7 +19,7 @@ Install Steps:
   
   A web browsing JSON extension like [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) will make this step easier.
 
-3) Open the TrelloPosterExample scene, and drag in the 'TrelloManager' prefab
+3) Drag in the 'TrelloManager' prefab to any scene.
 
 4) Play the scene and post a card!
 
