@@ -923,7 +923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0eb8e5f008b68a459335f4f39d2bbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trelloPublisher: {fileID: 11400000, guid: ddb0fac205b39944eaf31e8d40bc4c2f, type: 2}
+  trelloPoster: {fileID: 11400000, guid: ddb0fac205b39944eaf31e8d40bc4c2f, type: 2}
   trelloCanvas: {fileID: 1221425417629000}
   reportPanel: {fileID: 1048461102280718}
   cardName: {fileID: 114214003635795610}
