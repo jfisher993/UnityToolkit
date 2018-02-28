@@ -13,20 +13,15 @@ Install Steps:
 
 2) Authorize and test your Trello connection by clicking the buttons and filling in the fields on the 'TrelloPosterExample' asset.
 
-       a. Get Key
-  
-       b. Get Token
-  
-       c. Get Board Id's
-  
-       d. Get Card List Id's
-  
+       a. Get Key  
+       b. Get Token  
+       c. Get Board Id's  
+       d. Get Card List Id's  
        e. Publish Test Cards
   
-  
-  A web browsing JSON extension like [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) will make this step easier.
-
-
+A web browsing JSON extension like [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) will make this step easier.
+   
+   
 3) Drag in the 'TrelloManager' prefab to any scene.
 
 
