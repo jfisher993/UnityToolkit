@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Trello;
@@ -9,7 +8,7 @@ public class TrelloUI : MonoBehaviour {
 	private static readonly string[] TRELLO_POSITIONS = { "top", "bottom" };
 
 	[SerializeField]
-	private TrelloPublisher trelloPublisher;
+	private TrelloPoster trelloPoster;
 	[SerializeField]
 	private GameObject trelloCanvas;
 	[SerializeField]
@@ -28,19 +27,23 @@ public class TrelloUI : MonoBehaviour {
 	}
 
 	public void StartPostCard() {
-		StartCoroutine(trelloPublisher.PostCard(new TrelloCard(cardName.text, cardDesc.text, TRELLO_POSITIONS[cardPosition.value], trelloPublisher.TrelloCardListOptions[cardList.value].Id)));
+		StartCoroutine(trelloPoster.PostCard(new TrelloCard(cardName.text, cardDesc.text, TRELLO_POSITIONS[cardPosition.value], trelloPoster.TrelloCardListOptions[cardList.value].Id)));
 	}
 
 	private void SetCardListOptionData() {
 		List<Dropdown.OptionData> cardListOptions = new List<Dropdown.OptionData>();
-		for (int i = 0; i < trelloPublisher.TrelloCardListOptions.Length; i++) {
-			cardListOptions.Add(new Dropdown.OptionData(trelloPublisher.TrelloCardListOptions[i].Name));
+		for (int i = 0; i < trelloPoster.TrelloCardListOptions.Length; i++) {
+			cardListOptions.Add(new Dropdown.OptionData(trelloPoster.TrelloCardListOptions[i].Name));
 		}
 		cardList.AddOptions(cardListOptions);
 	}
 
 	public void ToggleCanvas() {
 		trelloCanvas.SetActive(!trelloCanvas.activeSelf);
+	}
+
+	public void ToggleCanvas(bool isEnabled) {
+		trelloCanvas.SetActive(isEnabled);
 	}
 
 	public void TogglePanel() {

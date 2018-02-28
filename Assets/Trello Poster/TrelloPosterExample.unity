@@ -217,6 +217,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114108965753824784, guid: 2e54aaac82c38b14089f01c5d163786e,
+        type: 2}
+      propertyPath: trelloPoster
+      value: 
+      objectReference: {fileID: 11400000, guid: ddb0fac205b39944eaf31e8d40bc4c2f,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e54aaac82c38b14089f01c5d163786e, type: 2}
   m_IsPrefabParent: 0

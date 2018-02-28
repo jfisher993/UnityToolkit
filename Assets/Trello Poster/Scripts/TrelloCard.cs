@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Trello {
+
 	public class TrelloCard {
 
 		private string name;
@@ -29,4 +28,5 @@ namespace Trello {
 			return postBody;
 		}
 	}
+
 }

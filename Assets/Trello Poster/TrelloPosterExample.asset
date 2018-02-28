@@ -9,10 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41c7f888198b7824c971f28883c2a36d, type: 3}
-  m_Name: TrelloPublisher-Example
+  m_Name: TrelloPosterExample
   m_EditorClassIdentifier: 
   key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  boardId: XXXXXXXXXXXXXXXXXXXXXXXX
   trelloCardListOptions:
   - name: Bug
     id: XXXXXXXXXXXXXXXXXXXXXXXX
