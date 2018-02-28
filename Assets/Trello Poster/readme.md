@@ -19,7 +19,7 @@ Install Steps:
        d. Get Card List Id's  
        e. Publish Test Cards
   
-A web browsing JSON extension like [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) will make this step easier.
+    A web browsing JSON extension like [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) will make this step easier.
    
    
 3) Drag in the 'TrelloManager' prefab to any scene.
