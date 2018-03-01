@@ -6,6 +6,7 @@ The Trello cards can be posted with a title, description, to the top or bottom o
 
 Demo UI script, and TrelloManager prefab provided.
 
+[Video Tutorial](https://www.youtube.com/watch?v=ryXwG1j4rhI)
 
 Install Steps:
 
