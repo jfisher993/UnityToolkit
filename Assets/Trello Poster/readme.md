@@ -1,4 +1,4 @@
-Trello Poster allows you and your users to create cards directly from your game to Trello.
+Trello Poster allows you and your users to create cards directly from your game and post them directly to Trello.
 
 The cards can be posted with a title, description, to the top or bottom of a Trello list, and to any Trello list within your board.
 
