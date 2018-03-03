@@ -24,17 +24,17 @@ namespace Trello {
 
 		public IEnumerator PostCard(TrelloCard card) {
 			WWWForm postBody = card.GetPostBody();
-			UnityWebRequest connection = UnityWebRequest.Post(CARD_BASE_URL + "?" + "key=" + key + "&token=" + token, postBody);
-			connection.chunkedTransfer = false;
-			yield return connection.SendWebRequest();
-			CheckConnectionStatus(CARD_UPLOAD_ERROR, connection);
+			UnityWebRequest webRequest = UnityWebRequest.Post(CARD_BASE_URL + "?" + "key=" + key + "&token=" + token, postBody);
+			webRequest.chunkedTransfer = false;
+			yield return webRequest.SendWebRequest();
+			CheckWebRequestStatusAndDispose(webRequest, CARD_UPLOAD_ERROR);
 		}
 
-		private void CheckConnectionStatus(string errorMessage, UnityWebRequest connection) {
-			if (!string.IsNullOrEmpty(connection.error)) {
-				Debug.LogError(errorMessage + connection.error);
+		private void CheckWebRequestStatusAndDispose(UnityWebRequest webRequest, string errorMessage = "Web Request Error: ") {
+			if (!string.IsNullOrEmpty(webRequest.error)) {
+				Debug.LogError(errorMessage + webRequest.downloadHandler.text);
 			}
-			connection.Dispose();
+			webRequest.Dispose();
 		}
 
 		public string Key {
