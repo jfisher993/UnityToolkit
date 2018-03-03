@@ -39,11 +39,15 @@ namespace Trello {
 		}
 
 		private string FormattedDescription() {
-			return "###Summary\n" + desc + "\n###Game Info\n" + GetGameInfo() + "\n###System Info\n" + GetSystemInfo();
+			return "###Summary\n" + desc + "\n###Game State\n" + GetGameState() + "\n###Settings\n" + GetSettings() + "\n###System Info\n" + GetSystemInfo();
 		}
 
-		private string GetGameInfo() {
-			return "Add specific game info here. Things like the players position or the current scene name.";
+		private string GetGameState() {
+			return "Add specific game state info here. Things like the players position or the current scene name.";
+		}
+
+		private string GetSettings() {
+			return "Screen Resolution: " + Screen.currentResolution + " \nFull Screen: " + Screen.fullScreen + "\nQuality Level: " + QualitySettings.GetQualityLevel();
 		}
 
 		private string GetSystemInfo() {
