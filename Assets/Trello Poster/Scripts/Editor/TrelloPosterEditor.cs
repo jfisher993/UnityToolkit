@@ -69,8 +69,7 @@ namespace Trello {
 
 		private bool IsTrelloOptionInvalid(TrelloCardOption[] trelloOption) {
 			for (int i = 0; i < trelloOption.Length; i++) {
-				bool isInvalid = IsInvalid(trelloOption[i].Id, BOARD_CARD_LABEL_ID_LENGTH);
-				if (isInvalid) {
+				if (IsInvalid(trelloOption[i].Id, BOARD_CARD_LABEL_ID_LENGTH)) {
 					return true;
 				}
 			}
