@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
 namespace Trello {
 
@@ -17,24 +18,23 @@ namespace Trello {
 		[SerializeField]
 		private string boardId = "XXXXXXXXXXXXXXXXXXXXXXXX";
 		[SerializeField]
-		private TrelloCardListOption[] trelloCardListOptions = new TrelloCardListOption[1] { new TrelloCardListOption("Card List Name", "XXXXXXXXXXXXXXXXXXXXXXXX") };
+		private TrelloCardOption[] cardLists = new TrelloCardOption[1] { new TrelloCardOption("Card List Name", "XXXXXXXXXXXXXXXXXXXXXXXX") };
+		[SerializeField]
+		private TrelloCardOption[] cardLabels = new TrelloCardOption[1] { new TrelloCardOption("Card Label Name", "XXXXXXXXXXXXXXXXXXXXXXXX") };
 
 		public IEnumerator PostCard(TrelloCard card) {
-			WWW connection = new WWW(CARD_BASE_URL + "?" + "key=" + key + "&token=" + token, card.GetPostBody());
-			yield return connection;
+			WWWForm postBody = card.GetPostBody();
+			UnityWebRequest connection = UnityWebRequest.Post(CARD_BASE_URL + "?" + "key=" + key + "&token=" + token, postBody);
+			connection.chunkedTransfer = false;
+			yield return connection.SendWebRequest();
 			CheckConnectionStatus(CARD_UPLOAD_ERROR, connection);
 		}
 
-		private void CheckConnectionStatus(string errorMessage, WWW connection) {
+		private void CheckConnectionStatus(string errorMessage, UnityWebRequest connection) {
 			if (!string.IsNullOrEmpty(connection.error)) {
 				Debug.LogError(errorMessage + connection.error);
 			}
-		}
-
-		public TrelloCardListOption[] TrelloCardListOptions {
-			get {
-				return trelloCardListOptions;
-			}
+			connection.Dispose();
 		}
 
 		public string Key {
@@ -52,6 +52,18 @@ namespace Trello {
 		public string BoardId {
 			get {
 				return boardId;
+			}
+		}
+
+		public TrelloCardOption[] TrelloCardListOptions {
+			get {
+				return cardLists;
+			}
+		}
+
+		public TrelloCardOption[] TrelloCardLabelOptions {
+			get {
+				return cardLabels;
 			}
 		}
 

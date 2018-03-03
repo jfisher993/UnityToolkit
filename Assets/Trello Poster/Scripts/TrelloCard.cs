@@ -1,31 +1,53 @@
 ﻿using UnityEngine;
+using System;
 
 namespace Trello {
 
 	public class TrelloCard {
 
+		private const string TIMESTAMP_FORMAT = "yyyy-MM-dd_HH.mm.ss";
+
 		private string name;
 		private string desc;
 		private string pos;
 		private string idList;
-		private string due;
+		private string idLabels;
+		private byte[] screenshot;
 
-		public TrelloCard(string name, string desc, string pos, string idList, string due = "null") {
+		public TrelloCard(string name, string desc, string pos, string idList, string idLabels, byte[] screenshot) {
 			this.name = name;
 			this.desc = desc;
 			this.pos = pos;
 			this.idList = idList;
-			this.due = due;
+			this.idLabels = idLabels;
+			this.screenshot = screenshot;
 		}
 
 		public WWWForm GetPostBody() {
 			WWWForm postBody = new WWWForm();
 			postBody.AddField("name", name);
-			postBody.AddField("desc", desc);
+			postBody.AddField("desc", FormattedDescription());
 			postBody.AddField("pos", pos);
-			postBody.AddField("due", due);
 			postBody.AddField("idList", idList);
+			if (!string.IsNullOrEmpty(idLabels)) {
+				postBody.AddField("idLabels", idLabels);
+			}
+			if (screenshot != null) {
+				postBody.AddBinaryData("fileSource", screenshot, "screenshot_" + DateTime.Now.ToString(TIMESTAMP_FORMAT) + ".png");
+			}
 			return postBody;
+		}
+
+		private string FormattedDescription() {
+			return "###Summary\n" + desc + "\n###Game Info\n" + GetGameInfo() + "\n###System Info\n" + GetSystemInfo();
+		}
+
+		private string GetGameInfo() {
+			return "Add specific game info here. Things like the players position or the current scene name.";
+		}
+
+		private string GetSystemInfo() {
+			return "OS: " + SystemInfo.operatingSystem + "\nProcessor: " + SystemInfo.processorType + "\nMemory: " + SystemInfo.systemMemorySize + "\nGraphics API: " + SystemInfo.graphicsDeviceType + "\nGraphics Processor: " + SystemInfo.graphicsDeviceName + "\nGraphics Memory: " + SystemInfo.graphicsMemorySize + "\nGraphics Vendor: " + SystemInfo.graphicsDeviceVendor;
 		}
 
 	}

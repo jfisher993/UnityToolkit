@@ -5,7 +5,7 @@ using Trello;
 
 public class TrelloUI : MonoBehaviour {
 
-	private static readonly string[] TRELLO_POSITIONS = { "top", "bottom" };
+	private static readonly string[] TRELLO_CARD_POSITIONS = { "top", "bottom" };
 
 	[SerializeField]
 	private TrelloPoster trelloPoster;
@@ -21,21 +21,35 @@ public class TrelloUI : MonoBehaviour {
 	private Dropdown cardPosition;
 	[SerializeField]
 	private Dropdown cardList;
+	[SerializeField]
+	private Dropdown cardLabel;
+	[SerializeField]
+	private Toggle includeScreenshot;
+
+	private Texture2D screenshot;
+	private bool noLabels = false;
 
 	private void Start() {
-		SetCardListOptionData();
+		cardList.AddOptions(GetDropdownOptions(trelloPoster.TrelloCardListOptions));
+		TrelloCardOption[] cardLabels = trelloPoster.TrelloCardLabelOptions;
+		if (cardLabels == null || cardLabels.Length == 0) {
+			noLabels = true;
+			cardLabel.gameObject.SetActive(false);
+		} else {
+			cardLabel.AddOptions(GetDropdownOptions(cardLabels));
+		}
 	}
 
 	public void StartPostCard() {
-		StartCoroutine(trelloPoster.PostCard(new TrelloCard(cardName.text, cardDesc.text, TRELLO_POSITIONS[cardPosition.value], trelloPoster.TrelloCardListOptions[cardList.value].Id)));
+		StartCoroutine(trelloPoster.PostCard(new TrelloCard(cardName.text, cardDesc.text, TRELLO_CARD_POSITIONS[cardPosition.value], trelloPoster.TrelloCardListOptions[cardList.value].Id, noLabels ? null : trelloPoster.TrelloCardLabelOptions[cardLabel.value].Id, includeScreenshot.isOn ? screenshot.EncodeToPNG() : null)));
 	}
 
-	private void SetCardListOptionData() {
-		List<Dropdown.OptionData> cardListOptions = new List<Dropdown.OptionData>();
-		for (int i = 0; i < trelloPoster.TrelloCardListOptions.Length; i++) {
-			cardListOptions.Add(new Dropdown.OptionData(trelloPoster.TrelloCardListOptions[i].Name));
+	private List<Dropdown.OptionData> GetDropdownOptions(TrelloCardOption[] cardOptions) {
+		List<Dropdown.OptionData> dropdownOptions = new List<Dropdown.OptionData>();
+		for (int i = 0; i < cardOptions.Length; i++) {
+			dropdownOptions.Add(new Dropdown.OptionData(cardOptions[i].Name));
 		}
-		cardList.AddOptions(cardListOptions);
+		return dropdownOptions;
 	}
 
 	public void ToggleCanvas() {
@@ -48,10 +62,13 @@ public class TrelloUI : MonoBehaviour {
 
 	public void TogglePanel() {
 		reportPanel.SetActive(!reportPanel.activeSelf);
-		ResetUI();
 	}
 
-	private void ResetUI() {
+	public void TakeScreenshot() {
+		screenshot = ScreenCapture.CaptureScreenshotAsTexture();
+	}
+
+	public void ResetUI() {
 		cardName.text = "";
 		cardDesc.text = "";
 	}

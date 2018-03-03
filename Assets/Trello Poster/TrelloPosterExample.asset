@@ -14,10 +14,9 @@ MonoBehaviour:
   key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   boardId: XXXXXXXXXXXXXXXXXXXXXXXX
-  trelloCardListOptions:
-  - name: Bug
+  cardLists:
+  - name: Card List Name
     id: XXXXXXXXXXXXXXXXXXXXXXXX
-  - name: Suggestion
-    id: XXXXXXXXXXXXXXXXXXXXXXXX
-  - name: Other
+  cardLabels:
+  - name: Card Label Name
     id: XXXXXXXXXXXXXXXXXXXXXXXX

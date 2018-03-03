@@ -3,14 +3,14 @@
 namespace Trello {
 
 	[System.Serializable]
-	public class TrelloCardListOption {
+	public class TrelloCardOption {
 
 		[SerializeField]
 		private string name;
 		[SerializeField]
 		private string id;
 
-		public TrelloCardListOption(string name, string id) {
+		public TrelloCardOption(string name, string id) {
 			this.name = name;
 			this.id = id;
 		}
