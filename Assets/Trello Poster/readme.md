@@ -1,9 +1,14 @@
-Trello Poster allows you and your users to create cards directly from your game to Trello.
+Trello Poster allows you and your users to create Trello cards directly from your Unity game and post them directly to Trello.
 
 The cards can be posted with a title, description, label, screenshot, to the top or bottom of a Trello list, and to any Trello list within your board.
 
+You can use Trello Poster for Unity as a bug reporting tool, or just for convenience among your development team. Trello Poster for Unity is highly customizable, and a snap to integrate.
+
+The Trello cards can be posted with a title, description, to the top or bottom of a Trello list, and to any Trello list within your board.
+
 Demo scene, UI script, and TrelloManager prefab provided.
 
+[Video Tutorial](https://www.youtube.com/watch?v=ryXwG1j4rhI)
 
 Install Steps:
 
