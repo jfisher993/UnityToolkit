@@ -2,30 +2,30 @@
 using UnityEngine.Networking;
 using System.Collections;
 
-namespace Mailchimp {
+namespace MailChimp {
 
-	[CreateAssetMenu(fileName = "New Mailchimp Subscriber", menuName = "Mailchimp Subscriber", order = 10002)]
-	public class MailchimpSubscriber : ScriptableObject {
+	[CreateAssetMenu(fileName = "New MailChimp Subscriber", menuName = "MailChimp Subscriber", order = 10002)]
+	public class MailChimpSubscriber : ScriptableObject {
 
-		private const string SIGN_UP_ERROR = "Could not sign up new subscriber to Mailchimp List: ";
+		private const string SIGN_UP_ERROR = "Could not subscribe user to MailChimp List: ";
 
 		[SerializeField]
 		private string formUrl;
 		[SerializeField]
 		private string formKey;
 
-		public IEnumerator Subscribe(MailchimpUser mailchimpUser) {
-			WWWForm form = mailchimpUser.AsForm();
+		public IEnumerator Subscribe(MailChimpUser mailChimpUser) {
+			WWWForm form = mailChimpUser.AsForm();
 			form.AddField(formKey, "");
 			UnityWebRequest webRequest = UnityWebRequest.Post(formUrl, form);
 			webRequest.chunkedTransfer = false;
 			yield return webRequest.SendWebRequest();
-			CheckWebRequestStatusAndDispose(webRequest, SIGN_UP_ERROR);
+			CheckWebRequestStatusAndDispose(webRequest, mailChimpUser, SIGN_UP_ERROR);
 		}
 
-		private void CheckWebRequestStatusAndDispose(UnityWebRequest webRequest, string errorMessage = "Web Request Error: ") {
+		private void CheckWebRequestStatusAndDispose(UnityWebRequest webRequest, MailChimpUser mailChimpUser, string errorMessage = "Web Request Error: ") {
 			if (!string.IsNullOrEmpty(webRequest.error)) {
-				Debug.LogError(errorMessage + webRequest.downloadHandler.text);
+				Debug.LogError(errorMessage + "\n" + mailChimpUser.ToString() + webRequest.downloadHandler.text);
 			}
 			webRequest.Dispose();
 		}

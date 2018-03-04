@@ -3,9 +3,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Text.RegularExpressions;
-using Mailchimp;
+using MailChimp;
 
-public class MailchimpUI : MonoBehaviour {
+public class MailChimpUI : MonoBehaviour {
 
 	private const string EMAIL_ADDRESS_REGEX = @".{1,}[@].{1,}[.].{1,}";
 	private const string INVALID_EMAIL_ADDRESS = "<color=red>Invalid Email Address!</color>";
@@ -13,7 +13,7 @@ public class MailchimpUI : MonoBehaviour {
 	private const int SUBSCRIBE_TIMEOUT = 15;
 
 	[SerializeField]
-	private MailchimpSubscriber mailchimpSubscriber;
+	private MailChimpSubscriber mailChimpSubscriber;
 	[SerializeField]
 	private GameObject subscribeCanvas;
 	[SerializeField]
@@ -58,13 +58,13 @@ public class MailchimpUI : MonoBehaviour {
 			StartCoroutine(SetResponseText(INVALID_EMAIL_ADDRESS));
 		} else {
 			StartCoroutine(SetResponseText(SUBSCRIBE_SUCCESS));
-			StartMailchimpSubscribe(new MailchimpUser(emailAddress.text, firstName.text, lastName.text));
+			StartMailChimpSubscribe(new MailChimpUser(emailAddress.text, firstName.text, lastName.text));
 			ResetUI();
 		}
 	}
 
-	public void StartMailchimpSubscribe(MailchimpUser mailchimpuser) {
-		StartCoroutine(mailchimpSubscriber.Subscribe(mailchimpuser));
+	public void StartMailChimpSubscribe(MailChimpUser mailChimpUser) {
+		StartCoroutine(mailChimpSubscriber.Subscribe(mailChimpUser));
 	}
 
 	private IEnumerator SetResponseText(string newResponse) {

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 769692b74382d0e4a96c2e5c9bae3118, type: 3}
-  m_Name: MailchimpSubscriberExample
+  m_Name: MailChimpSubscriberExample
   m_EditorClassIdentifier: 
   formUrl: 
   formKey: 

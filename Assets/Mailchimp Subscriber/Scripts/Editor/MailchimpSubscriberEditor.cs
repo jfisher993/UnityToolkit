@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace Mailchimp {
+namespace MailChimp {
 
-	[CustomEditor(typeof(MailchimpSubscriber))]
-	public class MailchimpSubscriberEditor : Editor {
+	[CustomEditor(typeof(MailChimpSubscriber))]
+	public class MailChimpSubscriberEditor : Editor {
 
 		private const string TEST_EMAIL_ADDRESS = "test@testemail.com";
 		private const string TEST_FIRST_NAME = "First";
@@ -13,19 +13,19 @@ namespace Mailchimp {
 		public override void OnInspectorGUI() {
 			base.OnInspectorGUI();
 
-			MailchimpSubscriber mailchimpSubscriber = (MailchimpSubscriber) target;
+			MailChimpSubscriber mailChimpSubscriber = (MailChimpSubscriber) target;
 
-			EditorGUI.BeginDisabledGroup(!Application.isPlaying || string.IsNullOrEmpty(mailchimpSubscriber.FormURL) || string.IsNullOrEmpty(mailchimpSubscriber.FormKey));
+			EditorGUI.BeginDisabledGroup(!Application.isPlaying || string.IsNullOrEmpty(mailChimpSubscriber.FormURL) || string.IsNullOrEmpty(mailChimpSubscriber.FormKey));
 
 			if (GUILayout.Button("Test Subscribe")) {
 				Debug.Log("Subscribing: " + TEST_EMAIL_ADDRESS);
-				FindObjectOfType<MailchimpUI>().StartMailchimpSubscribe(new MailchimpUser(TEST_EMAIL_ADDRESS, TEST_FIRST_NAME, TEST_LAST_NAME));
-				Debug.Log("Check your Mailchimp List to see if " + TEST_EMAIL_ADDRESS + " was subscribed!");
+				FindObjectOfType<MailChimpUI>().StartMailChimpSubscribe(new MailChimpUser(TEST_EMAIL_ADDRESS, TEST_FIRST_NAME, TEST_LAST_NAME));
+				Debug.Log("Check your MailChimp List to see if " + TEST_EMAIL_ADDRESS + " was subscribed!");
 			}
 
 			EditorGUI.EndDisabledGroup();
 
-			if (GUILayout.Button("Visit Mailchimp")) {
+			if (GUILayout.Button("Visit MailChimp")) {
 				Application.OpenURL("https://mailchimp.com/");
 			}
 		}
