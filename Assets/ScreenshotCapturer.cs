@@ -10,7 +10,7 @@ public class ScreenshotCapturer : MonoBehaviour {
 	[Range(1, 8)]
 	private int screenshotScale = 1;
 	[SerializeField]
-	private KeyCode screenshotHotkey = KeyCode.F12; // Default = F12 button
+	private KeyCode screenshotHotkey = KeyCode.F12; // Default = F12 key
 	[SerializeField]
 	private bool isBurstCapture = false;
 	[SerializeField]
