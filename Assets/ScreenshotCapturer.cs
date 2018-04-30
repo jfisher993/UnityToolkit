@@ -15,7 +15,7 @@ public class ScreenshotCapturer : MonoBehaviour {
 	private string screenshotDirectory;
 
 	private void Start() {
-		// Ex: C:\Users\Jeff\AppData\LocalLow\Luna Wolf Studios\ParaLily\Screenshots
+		// Ex: C:\Users\YourName\AppData\LocalLow\YourCompany\YourGame\Screenshots
 		screenshotDirectory = Application.persistentDataPath + SCREENSHOT_FOLDER;
 		if (!Directory.Exists(screenshotDirectory)) {
 			Directory.CreateDirectory(screenshotDirectory);
