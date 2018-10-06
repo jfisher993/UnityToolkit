@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-namespace MailChimp {
-
+namespace MailChimp
+{
 	[System.Serializable]
-	public class MailChimpUser {
-
+	public class MailChimpUser
+	{
 		[SerializeField]
 		private string emailAddress;
 		[SerializeField]
@@ -12,13 +12,15 @@ namespace MailChimp {
 		[SerializeField]
 		private string lastName;
 
-		public MailChimpUser(string emailAddress, string firstName = "", string lastName = "") {
+		public MailChimpUser(string emailAddress, string firstName = "", string lastName = "")
+		{
 			this.emailAddress = emailAddress;
 			this.firstName = firstName;
 			this.lastName = lastName;
 		}
 
-		public WWWForm AsForm() {
+		public WWWForm AsForm()
+		{
 			WWWForm form = new WWWForm();
 			form.AddField("EMAIL", emailAddress);
 			form.AddField("FNAME", firstName);
@@ -26,10 +28,9 @@ namespace MailChimp {
 			return form;
 		}
 
-		public override string ToString() {
+		public override string ToString()
+		{
 			return "Email Address=" + emailAddress + "\nFirst Name=" + firstName + "\nLast Name=" + lastName;
 		}
-
 	}
-
 }

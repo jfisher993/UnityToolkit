@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public abstract class ShiftCollider2D : MonoBehaviour {
-
+public abstract class ShiftCollider2D : MonoBehaviour
+{
 	[SerializeField]
 	protected Vector2 shiftAmount = Vector2.zero;
 	[SerializeField]
@@ -11,22 +11,26 @@ public abstract class ShiftCollider2D : MonoBehaviour {
 
 	abstract protected void ShiftPoints();
 
-	protected Vector2[] GetShiftedPoints(Vector2[] points) {
-		for (int i = 0; i < points.Length; i++) {
+	protected Vector2[] GetShiftedPoints(Vector2[] points)
+	{
+		for (int i = 0; i < points.Length; i++)
+		{
 			points[i] += shiftAmount;
 		}
 		return points;
 	}
 
-	private void OnValidate() {
-		if (inverse) {
+	private void OnValidate()
+	{
+		if (inverse)
+		{
 			shiftAmount *= -1;
 			inverse = false;
 		}
-		if (flip) {
+		if (flip)
+		{
 			shiftAmount = new Vector2(shiftAmount.y, shiftAmount.x);
 			flip = false;
 		}
 	}
-
 }

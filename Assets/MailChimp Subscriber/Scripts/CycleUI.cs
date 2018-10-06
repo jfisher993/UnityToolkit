@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CycleUI : MonoBehaviour {
-
+public class CycleUI : MonoBehaviour
+{
 	[SerializeField]
 	private GameObject[] cycleUI;
 	[SerializeField]
@@ -14,19 +14,25 @@ public class CycleUI : MonoBehaviour {
 
 	private EventSystem eventSystem;
 
-	private void Start() {
+	private void Start()
+	{
 		eventSystem = EventSystem.current;
 	}
 
-	private void Update() {
-		if (Input.GetKeyDown(cycleKey)) {
+	private void Update()
+	{
+		if (Input.GetKeyDown(cycleKey))
+		{
 			eventSystem.SetSelectedGameObject(NextCycle(Input.GetKey(reverse) ? -1 : 1));
 		}
 	}
 
-	private GameObject NextCycle(int direction) {
-		for (int i = 0; i < cycleUI.Length; i++) {
-			if (eventSystem.currentSelectedGameObject == cycleUI[i]) {
+	private GameObject NextCycle(int direction)
+	{
+		for (int i = 0; i < cycleUI.Length; i++)
+		{
+			if (eventSystem.currentSelectedGameObject == cycleUI[i])
+			{
 				Index = i + direction;
 				return cycleUI[Index];
 			}
@@ -35,18 +41,23 @@ public class CycleUI : MonoBehaviour {
 		return cycleUI[Index];
 	}
 
-	private int Index {
-		get {
+	private int Index
+	{
+		get
+		{
 			return index;
 		}
-		set {
+		set
+		{
 			index = value;
-			if (index >= cycleUI.Length) {
+			if (index >= cycleUI.Length)
+			{
 				index = 0;
-			} else if (index < 0) {
+			}
+			else if (index < 0)
+			{
 				index = cycleUI.Length - 1;
 			}
 		}
 	}
-
 }

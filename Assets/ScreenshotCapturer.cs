@@ -2,9 +2,9 @@
 using System.IO;
 using System;
 
-public class ScreenshotCapturer : MonoBehaviour {
-
-	private const string SCREENSHOT_FOLDER = "/Screenshots/";
+public class ScreenshotCapturer : MonoBehaviour
+{
+	private const string ScreenshotFolder = "/Screenshots/";
 
 	[SerializeField]
 	[Range(1, 8)]
@@ -20,46 +20,61 @@ public class ScreenshotCapturer : MonoBehaviour {
 	private string burstDirectory;
 	private string screenshotDirectory;
 
-	private void Start() {
+	private void Start()
+	{
 		// Ex: C:\Users\YourName\AppData\LocalLow\YourCompany\YourGame\Screenshots
-		screenshotDirectory = Application.persistentDataPath + SCREENSHOT_FOLDER;
-		if (!Directory.Exists(screenshotDirectory)) {
+		screenshotDirectory = Application.persistentDataPath + ScreenshotFolder;
+		if (!Directory.Exists(screenshotDirectory))
+		{
 			Directory.CreateDirectory(screenshotDirectory);
 		}
 		burstFrameCount = burstFrameFactor;
 	}
 
-	private void Update() {
-		if (isBurstCapture) {
+	private void Update()
+	{
+		if (isBurstCapture)
+		{
 			BurstCapture();
-		} else if (Input.GetKeyDown(screenshotHotkey)) {
+		}
+		else if (Input.GetKeyDown(screenshotHotkey))
+		{
 			CaptureScreenshot(screenshotDirectory);
 		}
 	}
 
-	private void BurstCapture() {
-		if (Input.GetKey(screenshotHotkey) && burstFrameCount >= burstFrameFactor) {
-			if (Input.GetKeyDown(screenshotHotkey)) {
+	private void BurstCapture()
+	{
+		if (Input.GetKey(screenshotHotkey) && burstFrameCount >= burstFrameFactor)
+		{
+			if (Input.GetKeyDown(screenshotHotkey))
+			{
 				burstDirectory = screenshotDirectory + "burst_" + FormattedDateTime + "/";
 				Directory.CreateDirectory(burstDirectory);
 			}
 			CaptureScreenshot(burstDirectory);
 			burstFrameCount = 0;
-		} else if (Input.GetKeyUp(screenshotHotkey)) {
+		}
+		else if (Input.GetKeyUp(screenshotHotkey))
+		{
 			burstFrameCount = burstFrameFactor;
-		} else {
+		}
+		else
+		{
 			burstFrameCount++;
 		}
 	}
 
-	private void CaptureScreenshot(string directory) {
+	private void CaptureScreenshot(string directory)
+	{
 		ScreenCapture.CaptureScreenshot(directory + "screenshot_" + FormattedDateTime + ".png", screenshotScale);
 	}
 
-	private string FormattedDateTime {
-		get {
+	private string FormattedDateTime
+	{
+		get
+		{
 			return DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss.ffff");
 		}
 	}
-
 }

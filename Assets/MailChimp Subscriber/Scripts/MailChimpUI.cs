@@ -5,12 +5,12 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using MailChimp;
 
-public class MailChimpUI : MonoBehaviour {
-
-	private const string EMAIL_ADDRESS_REGEX = @".{1,}[@].{1,}[.].{1,}";
-	private const string INVALID_EMAIL_ADDRESS = "<color=red>Invalid Email Address!</color>";
-	private const string SUBSCRIBE_SUCCESS = "<color=green>Thank you for Subscribing!</color>";
-	private const int SUBSCRIBE_TIMEOUT = 15;
+public class MailChimpUI : MonoBehaviour
+{
+	private const string EmailAddressRegex = @".{1,}[@].{1,}[.].{1,}";
+	private const string InvalidEmailAddress = "<color=red>Invalid Email Address!</color>";
+	private const string SubscribeSuccess = "<color=green>Thank you for Subscribing!</color>";
+	private const int SubscribeTimeout = 15;
 
 	[SerializeField]
 	private MailChimpSubscriber mailChimpSubscriber;
@@ -33,18 +33,25 @@ public class MailChimpUI : MonoBehaviour {
 
 	private float subscribeTimeout = 0;
 
-	private void Start() {
+	private void Start()
+	{
 		subscribeCanvas.SetActive(true);
 		eventSystem = EventSystem.current;
 	}
 
-	private void Update() {
-		if (IsSelected) {
-			if (Input.anyKey) {
+	private void Update()
+	{
+		if (IsSelected)
+		{
+			if (Input.anyKey)
+			{
 				subscribeTimeout = 0;
-			} else {
+			}
+			else
+			{
 				subscribeTimeout += Time.deltaTime;
-				if (subscribeTimeout > SUBSCRIBE_TIMEOUT) {
+				if (subscribeTimeout > SubscribeTimeout)
+				{
 					Deselect();
 					ResetUI();
 				}
@@ -52,53 +59,65 @@ public class MailChimpUI : MonoBehaviour {
 		}
 	}
 
-	public void Subscribe() {
+	public void Subscribe()
+	{
 		Deselect();
-		if (!Regex.IsMatch(emailAddress.text, EMAIL_ADDRESS_REGEX)) {
-			StartCoroutine(SetResponseText(INVALID_EMAIL_ADDRESS));
-		} else {
-			StartCoroutine(SetResponseText(SUBSCRIBE_SUCCESS));
+		if (!Regex.IsMatch(emailAddress.text, EmailAddressRegex))
+		{
+			StartCoroutine(SetResponseText(InvalidEmailAddress));
+		}
+		else
+		{
+			StartCoroutine(SetResponseText(SubscribeSuccess));
 			StartMailChimpSubscribe(new MailChimpUser(emailAddress.text, firstName.text, lastName.text));
 			ResetUI();
 		}
 	}
 
-	public void StartMailChimpSubscribe(MailChimpUser mailChimpUser) {
+	public void StartMailChimpSubscribe(MailChimpUser mailChimpUser)
+	{
 		StartCoroutine(mailChimpSubscriber.Subscribe(mailChimpUser));
 	}
 
-	private IEnumerator SetResponseText(string newResponse) {
+	private IEnumerator SetResponseText(string newResponse)
+	{
 		response.text = newResponse;
 		yield return new WaitUntil(() => IsSelected || !subscribePanel.activeSelf);
 		response.text = "";
 	}
 
-	private void Deselect() {
+	private void Deselect()
+	{
 		eventSystem.SetSelectedGameObject(null);
 	}
 
-	private void ResetUI() {
+	private void ResetUI()
+	{
 		emailAddress.text = "";
 		firstName.text = "";
 		lastName.text = "";
 	}
 
-	public void ToggleCanvas() {
+	public void ToggleCanvas()
+	{
 		subscribeCanvas.SetActive(!subscribeCanvas.activeSelf);
 	}
 
-	public void ToggleCanvas(bool isEnabled) {
+	public void ToggleCanvas(bool isEnabled)
+	{
 		subscribeCanvas.SetActive(isEnabled);
 	}
 
-	public void TogglePanel() {
+	public void TogglePanel()
+	{
 		subscribePanel.SetActive(!subscribePanel.activeSelf);
 	}
 
-	public bool IsSelected {
-		get {
+	public bool IsSelected
+	{
+		get
+		{
 			return eventSystem.currentSelectedGameObject != null;
 		}
 	}
-
 }
