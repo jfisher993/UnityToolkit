@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class MaterialPropertyFloatModifier : MonoBehaviour {
-
+public class MaterialPropertyFloatModifier : MonoBehaviour
+{
 	[SerializeField]
 	private Material mat;
 	[SerializeField]
@@ -11,12 +11,13 @@ public class MaterialPropertyFloatModifier : MonoBehaviour {
 	[SerializeField]
 	private float resetValue = 0;
 
-	private void Update() {
+	private void Update()
+	{
 		mat.SetFloat(property, mat.GetFloat(property) + deltaPerSecond * Time.deltaTime);
 	}
 
-	private void OnDisable() {
+	private void OnDisable()
+	{
 		mat.SetFloat(property, resetValue);
 	}
-
 }

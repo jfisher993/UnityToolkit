@@ -3,8 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Trello;
 
-public class TrelloUI : MonoBehaviour {
-
+public class TrelloUI : MonoBehaviour
+{
 	private static readonly string[] TRELLO_CARD_POSITIONS = { "top", "bottom" };
 
 	[SerializeField]
@@ -29,49 +29,59 @@ public class TrelloUI : MonoBehaviour {
 	private Texture2D screenshot;
 	private bool noLabels = false;
 
-	private void Start() {
+	private void Start()
+	{
 		cardList.AddOptions(GetDropdownOptions(trelloPoster.TrelloCardListOptions));
 		TrelloCardOption[] cardLabels = trelloPoster.TrelloCardLabelOptions;
-		if (cardLabels == null || cardLabels.Length == 0) {
+		if (cardLabels == null || cardLabels.Length == 0)
+		{
 			noLabels = true;
 			cardLabel.gameObject.SetActive(false);
-		} else {
+		}
+		else
+		{
 			cardLabel.AddOptions(GetDropdownOptions(cardLabels));
 		}
 	}
 
-	public void StartPostCard() {
+	public void StartPostCard()
+	{
 		StartCoroutine(trelloPoster.PostCard(new TrelloCard(cardName.text, cardDesc.text, TRELLO_CARD_POSITIONS[cardPosition.value], trelloPoster.TrelloCardListOptions[cardList.value].Id, noLabels ? null : trelloPoster.TrelloCardLabelOptions[cardLabel.value].Id, includeScreenshot.isOn ? screenshot.EncodeToPNG() : null)));
 	}
 
-	private List<Dropdown.OptionData> GetDropdownOptions(TrelloCardOption[] cardOptions) {
+	private List<Dropdown.OptionData> GetDropdownOptions(TrelloCardOption[] cardOptions)
+	{
 		List<Dropdown.OptionData> dropdownOptions = new List<Dropdown.OptionData>();
-		for (int i = 0; i < cardOptions.Length; i++) {
+		for (int i = 0; i < cardOptions.Length; i++)
+		{
 			dropdownOptions.Add(new Dropdown.OptionData(cardOptions[i].Name));
 		}
 		return dropdownOptions;
 	}
 
-	public void ToggleCanvas() {
+	public void ToggleCanvas()
+	{
 		trelloCanvas.SetActive(!trelloCanvas.activeSelf);
 	}
 
-	public void ToggleCanvas(bool isEnabled) {
+	public void ToggleCanvas(bool isEnabled)
+	{
 		trelloCanvas.SetActive(isEnabled);
 	}
 
-	public void TogglePanel() {
+	public void TogglePanel()
+	{
 		reportPanel.SetActive(!reportPanel.activeSelf);
 	}
 
-	public void TakeScreenshot() {
+	public void TakeScreenshot()
+	{
 		screenshot = ScreenCapture.CaptureScreenshotAsTexture();
 	}
 
-	public void ResetUI() {
+	public void ResetUI()
+	{
 		cardName.text = "";
 		cardDesc.text = "";
 	}
-
 }
-

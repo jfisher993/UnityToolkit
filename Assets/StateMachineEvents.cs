@@ -1,29 +1,35 @@
 ﻿using UnityEngine;
 using System;
 
-public class StateMachineEvents : StateMachineBehaviour {
-
+public class StateMachineEvents : StateMachineBehaviour
+{
 	public event Action OnEnter;
 	public event Action OnUpdate;
 	public event Action OnEnded;
 	public event Action OnExit;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	{
 		OnEnter.SafeFire();
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		if (stateInfo.normalizedTime >= 1) {
+	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	{
+		if (stateInfo.normalizedTime >= 1)
+		{
 			OnEnded.SafeFire();
-		} else {
+		}
+		else
+		{
 			OnUpdate.SafeFire();
 		}
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	{
 		OnExit.SafeFire();
 	}
 
@@ -36,5 +42,4 @@ public class StateMachineEvents : StateMachineBehaviour {
 	//override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 	//
 	//}
-
 }
