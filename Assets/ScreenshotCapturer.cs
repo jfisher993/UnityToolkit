@@ -4,7 +4,7 @@ using System;
 
 public class ScreenshotCapturer : MonoBehaviour
 {
-	private const string SCREENSHOT_FOLDER = "/Screenshots/";
+	private const string ScreenshotFolder = "/Screenshots/";
 
 	[SerializeField]
 	[Range(1, 8)]
@@ -23,7 +23,7 @@ public class ScreenshotCapturer : MonoBehaviour
 	private void Start()
 	{
 		// Ex: C:\Users\YourName\AppData\LocalLow\YourCompany\YourGame\Screenshots
-		screenshotDirectory = Application.persistentDataPath + SCREENSHOT_FOLDER;
+		screenshotDirectory = Application.persistentDataPath + ScreenshotFolder;
 		if (!Directory.Exists(screenshotDirectory))
 		{
 			Directory.CreateDirectory(screenshotDirectory);

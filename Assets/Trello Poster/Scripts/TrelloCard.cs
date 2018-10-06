@@ -5,7 +5,7 @@ namespace Trello
 {
 	public class TrelloCard
 	{
-		private const string TIMESTAMP_FORMAT = "yyyy-MM-dd_HH.mm.ss";
+		private const string TimestampFormat = "yyyy-MM-dd_HH.mm.ss";
 
 		private string name;
 		private string desc;
@@ -37,7 +37,7 @@ namespace Trello
 			}
 			if (screenshot != null)
 			{
-				postBody.AddBinaryData("fileSource", screenshot, "screenshot_" + DateTime.Now.ToString(TIMESTAMP_FORMAT) + ".png");
+				postBody.AddBinaryData("fileSource", screenshot, "screenshot_" + DateTime.Now.ToString(TimestampFormat) + ".png");
 			}
 			return postBody;
 		}

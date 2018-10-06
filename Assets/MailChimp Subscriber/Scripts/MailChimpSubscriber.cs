@@ -7,7 +7,7 @@ namespace MailChimp
 	[CreateAssetMenu(fileName = "New MailChimp Subscriber", menuName = "MailChimp Subscriber", order = 10002)]
 	public class MailChimpSubscriber : ScriptableObject
 	{
-		private const string SIGN_UP_ERROR = "Could not subscribe user to MailChimp List: ";
+		private const string SignUpError = "Could not subscribe user to MailChimp List: ";
 
 		[SerializeField]
 		private string formUrl;
@@ -21,7 +21,7 @@ namespace MailChimp
 			UnityWebRequest webRequest = UnityWebRequest.Post(formUrl, form);
 			webRequest.chunkedTransfer = false;
 			yield return webRequest.SendWebRequest();
-			CheckWebRequestStatusAndDispose(webRequest, mailChimpUser, SIGN_UP_ERROR);
+			CheckWebRequestStatusAndDispose(webRequest, mailChimpUser, SignUpError);
 		}
 
 		private void CheckWebRequestStatusAndDispose(UnityWebRequest webRequest, MailChimpUser mailChimpUser, string errorMessage = "Web Request Error: ")

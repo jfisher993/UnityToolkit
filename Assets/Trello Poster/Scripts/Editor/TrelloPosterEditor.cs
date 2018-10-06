@@ -8,10 +8,10 @@ namespace Trello
 	[CustomEditor(typeof(TrelloPoster))]
 	public class TrelloPosterEditor : Editor
 	{
-		private const string HEX_REGEX = @"[0-9]|[a-f]";
-		private const int KEY_LENGTH = 32;
-		private const int TOKEN_LENGTH = 64;
-		private const int BOARD_CARD_LABEL_ID_LENGTH = 24;
+		private const string HexRegex = @"[0-9]|[a-f]";
+		private const int KeyLength = 32;
+		private const int TokenLength = 64;
+		private const int BoardCardLabelIdLength = 24;
 
 		public override void OnInspectorGUI()
 		{
@@ -27,21 +27,21 @@ namespace Trello
 				Application.OpenURL("https://trello.com/app-key");
 			}
 
-			EditorGUI.BeginDisabledGroup(IsInvalid(key, KEY_LENGTH));
+			EditorGUI.BeginDisabledGroup(IsInvalid(key, KeyLength));
 
 			if (GUILayout.Button("Get Token"))
 			{
 				Application.OpenURL("https://trello.com/1/authorize?key=" + key + "&scope=read%2Cwrite&expiration=never&response_type=token");
 			}
 
-			EditorGUI.BeginDisabledGroup(IsInvalid(token, TOKEN_LENGTH));
+			EditorGUI.BeginDisabledGroup(IsInvalid(token, TokenLength));
 
 			if (GUILayout.Button("Get Board Id's"))
 			{
 				Application.OpenURL("https://api.trello.com/1/members/me/boards?key=" + key + "&token=" + token);
 			}
 
-			EditorGUI.BeginDisabledGroup(IsInvalid(boardId, BOARD_CARD_LABEL_ID_LENGTH));
+			EditorGUI.BeginDisabledGroup(IsInvalid(boardId, BoardCardLabelIdLength));
 
 			if (GUILayout.Button("Get Card List Id's"))
 			{
@@ -80,7 +80,7 @@ namespace Trello
 		{
 			for (int i = 0; i < trelloOption.Length; i++)
 			{
-				if (IsInvalid(trelloOption[i].Id, BOARD_CARD_LABEL_ID_LENGTH))
+				if (IsInvalid(trelloOption[i].Id, BoardCardLabelIdLength))
 				{
 					return true;
 				}
@@ -90,7 +90,7 @@ namespace Trello
 
 		private bool IsInvalid(string field, int length)
 		{
-			return field.Length != length || !Regex.IsMatch(field, HEX_REGEX);
+			return field.Length != length || !Regex.IsMatch(field, HexRegex);
 		}
 	}
 }

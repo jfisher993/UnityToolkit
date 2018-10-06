@@ -5,7 +5,7 @@ using Trello;
 
 public class TrelloUI : MonoBehaviour
 {
-	private static readonly string[] TRELLO_CARD_POSITIONS = { "top", "bottom" };
+	private static readonly string[] TrelloCardPositions = { "top", "bottom" };
 
 	[SerializeField]
 	private TrelloPoster trelloPoster;
@@ -46,7 +46,7 @@ public class TrelloUI : MonoBehaviour
 
 	public void StartPostCard()
 	{
-		StartCoroutine(trelloPoster.PostCard(new TrelloCard(cardName.text, cardDesc.text, TRELLO_CARD_POSITIONS[cardPosition.value], trelloPoster.TrelloCardListOptions[cardList.value].Id, noLabels ? null : trelloPoster.TrelloCardLabelOptions[cardLabel.value].Id, includeScreenshot.isOn ? screenshot.EncodeToPNG() : null)));
+		StartCoroutine(trelloPoster.PostCard(new TrelloCard(cardName.text, cardDesc.text, TrelloCardPositions[cardPosition.value], trelloPoster.TrelloCardListOptions[cardList.value].Id, noLabels ? null : trelloPoster.TrelloCardLabelOptions[cardLabel.value].Id, includeScreenshot.isOn ? screenshot.EncodeToPNG() : null)));
 	}
 
 	private List<Dropdown.OptionData> GetDropdownOptions(TrelloCardOption[] cardOptions)

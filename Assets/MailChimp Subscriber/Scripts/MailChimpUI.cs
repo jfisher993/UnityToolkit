@@ -7,10 +7,10 @@ using MailChimp;
 
 public class MailChimpUI : MonoBehaviour
 {
-	private const string EMAIL_ADDRESS_REGEX = @".{1,}[@].{1,}[.].{1,}";
-	private const string INVALID_EMAIL_ADDRESS = "<color=red>Invalid Email Address!</color>";
-	private const string SUBSCRIBE_SUCCESS = "<color=green>Thank you for Subscribing!</color>";
-	private const int SUBSCRIBE_TIMEOUT = 15;
+	private const string EmailAddressRegex = @".{1,}[@].{1,}[.].{1,}";
+	private const string InvalidEmailAddress = "<color=red>Invalid Email Address!</color>";
+	private const string SubscribeSuccess = "<color=green>Thank you for Subscribing!</color>";
+	private const int SubscribeTimeout = 15;
 
 	[SerializeField]
 	private MailChimpSubscriber mailChimpSubscriber;
@@ -50,7 +50,7 @@ public class MailChimpUI : MonoBehaviour
 			else
 			{
 				subscribeTimeout += Time.deltaTime;
-				if (subscribeTimeout > SUBSCRIBE_TIMEOUT)
+				if (subscribeTimeout > SubscribeTimeout)
 				{
 					Deselect();
 					ResetUI();
@@ -62,13 +62,13 @@ public class MailChimpUI : MonoBehaviour
 	public void Subscribe()
 	{
 		Deselect();
-		if (!Regex.IsMatch(emailAddress.text, EMAIL_ADDRESS_REGEX))
+		if (!Regex.IsMatch(emailAddress.text, EmailAddressRegex))
 		{
-			StartCoroutine(SetResponseText(INVALID_EMAIL_ADDRESS));
+			StartCoroutine(SetResponseText(InvalidEmailAddress));
 		}
 		else
 		{
-			StartCoroutine(SetResponseText(SUBSCRIBE_SUCCESS));
+			StartCoroutine(SetResponseText(SubscribeSuccess));
 			StartMailChimpSubscribe(new MailChimpUser(emailAddress.text, firstName.text, lastName.text));
 			ResetUI();
 		}

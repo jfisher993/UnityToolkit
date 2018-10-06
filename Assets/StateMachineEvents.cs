@@ -3,34 +3,34 @@ using System;
 
 public class StateMachineEvents : StateMachineBehaviour
 {
-	public event Action OnEnter;
-	public event Action OnUpdate;
-	public event Action OnEnded;
-	public event Action OnExit;
+	public event Action Enter;
+	public event Action Update;
+	public event Action Ended;
+	public event Action Exit;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		OnEnter.SafeFire();
+		Enter.SafeFire();
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		if (stateInfo.normalizedTime >= 1)
 		{
-			OnEnded.SafeFire();
+			Ended.SafeFire();
 		}
 		else
 		{
-			OnUpdate.SafeFire();
+			Update.SafeFire();
 		}
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		OnExit.SafeFire();
+		Exit.SafeFire();
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

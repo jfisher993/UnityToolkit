@@ -6,9 +6,9 @@ namespace MailChimp
 	[CustomEditor(typeof(MailChimpSubscriber))]
 	public class MailChimpSubscriberEditor : Editor
 	{
-		private const string TEST_EMAIL_ADDRESS = "test@testemail.com";
-		private const string TEST_FIRST_NAME = "First";
-		private const string TEST_LAST_NAME = "Last";
+		private const string TestEmailAddress = "test@testemail.com";
+		private const string TestFirstName = "First";
+		private const string TestLastName = "Last";
 
 		public override void OnInspectorGUI()
 		{
@@ -20,9 +20,9 @@ namespace MailChimp
 
 			if (GUILayout.Button("Test Subscribe"))
 			{
-				Debug.Log("Subscribing: " + TEST_EMAIL_ADDRESS);
-				FindObjectOfType<MailChimpUI>().StartMailChimpSubscribe(new MailChimpUser(TEST_EMAIL_ADDRESS, TEST_FIRST_NAME, TEST_LAST_NAME));
-				Debug.Log("Check your MailChimp List to see if " + TEST_EMAIL_ADDRESS + " was subscribed!");
+				Debug.Log("Subscribing: " + TestEmailAddress);
+				FindObjectOfType<MailChimpUI>().StartMailChimpSubscribe(new MailChimpUser(TestEmailAddress, TestFirstName, TestLastName));
+				Debug.Log("Check your MailChimp List to see if " + TestEmailAddress + " was subscribed!");
 			}
 
 			EditorGUI.EndDisabledGroup();

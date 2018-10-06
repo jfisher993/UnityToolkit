@@ -7,9 +7,9 @@ namespace Trello
 	[CreateAssetMenu(fileName = "New Trello Poster", menuName = "Trello Poster", order = 10001)]
 	public class TrelloPoster : ScriptableObject
 	{
-		private const string TRELLO_BASE_URL = "https://api.trello.com/1";
-		private const string CARD_BASE_URL = TRELLO_BASE_URL + "/cards/";
-		private const string CARD_UPLOAD_ERROR = "Could not upload new card to Trello: ";
+		private const string TrelloBaseUrl = "https://api.trello.com/1";
+		private const string CardBaseUrl = TrelloBaseUrl + "/cards/";
+		private const string CardUploadError = "Could not upload new card to Trello: ";
 
 		[SerializeField]
 		private string key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
@@ -25,10 +25,10 @@ namespace Trello
 		public IEnumerator PostCard(TrelloCard card)
 		{
 			WWWForm postBody = card.GetPostBody();
-			UnityWebRequest webRequest = UnityWebRequest.Post(CARD_BASE_URL + "?" + "key=" + key + "&token=" + token, postBody);
+			UnityWebRequest webRequest = UnityWebRequest.Post(CardBaseUrl + "?" + "key=" + key + "&token=" + token, postBody);
 			webRequest.chunkedTransfer = false;
 			yield return webRequest.SendWebRequest();
-			CheckWebRequestStatusAndDispose(webRequest, CARD_UPLOAD_ERROR);
+			CheckWebRequestStatusAndDispose(webRequest, CardUploadError);
 		}
 
 		private void CheckWebRequestStatusAndDispose(UnityWebRequest webRequest, string errorMessage = "Web Request Error: ")
