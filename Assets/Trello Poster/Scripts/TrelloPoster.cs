@@ -34,6 +34,10 @@ namespace Trello
 			WWWForm postBody = card.GetPostBody();
 			UnityWebRequest webRequest = BuildAuthenticatedWebRequest(CardBaseUrl, postBody);
 			yield return webRequest.SendWebRequest();
+			if (string.IsNullOrEmpty(webRequest.error))
+			{
+				LastCardId = JsonUtility.FromJson<TrelloCardResponse>(webRequest.downloadHandler.text).id;
+			}
 			CheckWebRequestStatusAndDispose(webRequest, CardUploadError);
 		}
 
@@ -57,11 +61,7 @@ namespace Trello
 
 		private void CheckWebRequestStatusAndDispose(UnityWebRequest webRequest, string errorMessage = "Web Request Error: ")
 		{
-			if (string.IsNullOrEmpty(webRequest.error))
-			{
-				LastCardId = JsonUtility.FromJson<TrelloCardResponse>(webRequest.downloadHandler.text).id;
-			}
-			else
+			if (!string.IsNullOrEmpty(webRequest.error))
 			{
 				Debug.LogError(errorMessage + webRequest.downloadHandler.text);
 			}
