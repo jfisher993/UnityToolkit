@@ -1,0 +1,11 @@
+{
+    "name": "com.example.project",
+    "displayName": "Example Project",
+    "version": "0.0.1",
+    "unity": "2019.4",
+    "description": "My description.",
+    "keywords": ["myKeyword"],
+    "category": "Category",
+    "dependencies": {
+    }
+}
