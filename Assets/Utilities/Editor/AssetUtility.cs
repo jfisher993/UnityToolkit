@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
 
 public static class AssetUtility
 {
 	public enum Extension { Anim, Controller, Cs, Fbx, Jpg, Json, Mat, Mp3, Mp4, Ogg, Playable, Png, Prefab, Shader, Txt, Unity, Wav };
 
 	private const string ReserializePath = "Assets/Reserialize/";
+
+	[MenuItem(ReserializePath + "Selected %&#r")]
+	public static void ReserializeSelected()
+	{
+		var assetPaths = Selection.objects.Select(s => AssetDatabase.GetAssetPath(s)).ToList();
+		AssetDatabase.ForceReserializeAssets(assetPaths);
+		Debug.Log($"Reserialized {assetPaths.Count} asset(s)");
+	}
 
 	[MenuItem(ReserializePath + "All")]
 	public static void ReserializeAll()
