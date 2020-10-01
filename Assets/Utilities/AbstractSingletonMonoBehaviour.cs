@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class AbstractSingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 {
-	public static T Instance { get; set; }
+	public static T Instance { get; private set; }
 
-	private void Awake()
+	protected abstract void OnSceneLoaded(Scene scene, LoadSceneMode mode);
+
+	protected virtual void Awake()
 	{
 		if (Instance == null)
 		{
-			Instance = InitializeInstance();
+			Instance = this as T;
+			SceneManager.sceneLoaded += OnSceneLoaded;
+			DontDestroyOnLoad(gameObject);
 		}
 		else
 		{
@@ -16,5 +21,16 @@ public abstract class AbstractSingletonMonoBehaviour<T> : MonoBehaviour where T 
 		}
 	}
 
-	protected abstract T InitializeInstance();
+	private void OnDestroy()
+	{
+		if (Instance == this)
+		{
+			SceneManager.sceneLoaded -= OnSceneLoaded;
+			InstanceDestroyed();
+		}
+	}
+
+	protected virtual void InstanceDestroyed()
+	{
+	}
 }
