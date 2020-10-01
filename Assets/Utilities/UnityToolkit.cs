@@ -514,7 +514,7 @@ namespace UnityEngine
 	public static class BoundsToolkit
 	{
 		/// <summary>
-		/// Returns this bounds converted to the specified cameras viewport
+		/// Returns this bounds converted to the specified cameras viewport.
 		/// </summary>
 		public static Bounds ConvertToViewportBounds(this Bounds bounds, Camera cam)
 		{
@@ -524,19 +524,24 @@ namespace UnityEngine
 		}
 	}
 
-	public static class CameraToolkit {
+	public static class CameraToolkit 
+	{
 		/// <summary>
-		/// Returns the bounds of the camera viewport only if its orthographic
+		/// Returns the bounds of the camera viewport only if its orthographic.
 		/// </summary>
-		public static Bounds OrthographicBounds (this Camera camera) {
-			if (camera.orthographic) {
+		public static Bounds OrthographicBounds (this Camera camera) 
+		{
+			if (camera.orthographic) 
+			{
 				float screenAspect = (float)Screen.width / (float)Screen.height;
 				float cameraHeight = camera.orthographicSize * 2;
 
 				return new Bounds (
 					camera.transform.position,
 					new Vector3 (cameraHeight * screenAspect, cameraHeight, 0));
-			} else {
+			} 
+			else 
+			{
 				Debug.LogError ("Camera is not orthographic.", camera);
 				return new Bounds ();
 			}
