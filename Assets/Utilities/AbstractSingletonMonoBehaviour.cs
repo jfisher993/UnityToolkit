@@ -17,4 +17,15 @@ public abstract class AbstractSingletonMonoBehaviour<T> : MonoBehaviour where T 
 	}
 
 	protected abstract T InitializeInstance();
+	private void OnDestroy()
+	{
+		if (Instance == this)
+		{
+			InstanceDestroyed();
+		}
+	}
+
+	protected virtual void InstanceDestroyed()
+	{
+	}
 }
