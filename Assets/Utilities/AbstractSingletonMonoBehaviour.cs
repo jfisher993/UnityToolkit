@@ -2,13 +2,13 @@
 
 public abstract class AbstractSingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 {
-	public static T Instance { get; set; }
+	public static T Instance { get; private set; }
 
 	private void Awake()
 	{
 		if (Instance == null)
 		{
-			Instance = InitializeInstance();
+			Instance = this as T;
 		}
 		else
 		{
@@ -16,7 +16,6 @@ public abstract class AbstractSingletonMonoBehaviour<T> : MonoBehaviour where T 
 		}
 	}
 
-	protected abstract T InitializeInstance();
 	private void OnDestroy()
 	{
 		if (Instance == this)
