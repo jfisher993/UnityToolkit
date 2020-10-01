@@ -9,6 +9,7 @@ public abstract class AbstractSingletonMonoBehaviour<T> : MonoBehaviour where T 
 		if (Instance == null)
 		{
 			Instance = this as T;
+			DontDestroyOnLoad(gameObject);
 		}
 		else
 		{
