@@ -4,6 +4,9 @@
 /// </summary>
 public static class RichTextUtility
 {
+	public const string WhiteHex = "FFFFFFFF";
+	public const string BlackHex = "00000000";
+
 	/// <summary>
 	/// Return this text with italicized rich text.
 	/// </summary>
