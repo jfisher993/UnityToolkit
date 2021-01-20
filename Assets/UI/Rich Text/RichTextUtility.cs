@@ -56,4 +56,15 @@ public static class RichTextUtility
 	{
 		return "<color=#" + hexColor + ">" + text + "</color>";
 	}
+
+	/// <summary>
+	/// Return this text with rich text changing the color to the specified Unity color.
+	/// </summary>
+	/// <param name="text"></param>
+	/// <param name="color"></param>
+	/// <returns></returns>
+	public static string ColorText(this string text, Color color)
+	{
+		return text.ColorText(ColorUtility.ToHtmlStringRGBA(color));
+	}
 }
